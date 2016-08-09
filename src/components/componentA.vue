@@ -1,18 +1,26 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h1>{{ msgFromParent }}</h1>
+    <button v-on:click="onClickA">click</button>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data: function () {
     return {
       // note: changing this line won't causes changes
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
       msg: 'this is from componentA!'
+    }
+  },
+  props: ['msgFromParent'],
+  methods: {
+    onClickA: function () {
+      this.$emit('child-tell-me-sth', this.msg);
     }
   }
 }

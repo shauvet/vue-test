@@ -8,7 +8,8 @@
             </li>
         </ul>
     </div>
-    <component-a></component-a>
+    <p>child tells me: {{ childWords }}</p>
+    <component-a msg-from-parent="you are handsome!" v-on:child-tell-me-sth="listenToMyBoy"></component-a>
 </template>
 <script>
 import Storage from './storage'
@@ -19,7 +20,8 @@ export default {
         return {
             title: 'this is todolist!',
             items: Storage.fetch(),
-            newItem: ''
+            newItem: '',
+            childWords: ''
         }
     },
     components: {ComponentA},
@@ -41,6 +43,10 @@ export default {
                 isFinished: false
             })
             this.newItem = '';
+        },
+        listenToMyBoy: function (msg) {
+            // console.log(this.childWords);
+            this.childWords = msg
         }
     }
 }
